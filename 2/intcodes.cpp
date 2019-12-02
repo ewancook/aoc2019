@@ -6,7 +6,7 @@ int totalise_instructions(std::vector<int> codes, int noun, int verb) {
     codes[1] = noun;
     codes[2] = verb;
 
-    for (auto i = 0; i <= codes.size(); i += 4) {
+    for (auto i = 0; i < codes.size(); i += 4) {
         auto op = codes[i];
         auto first = codes[i+1];
         auto second = codes[i+2];
