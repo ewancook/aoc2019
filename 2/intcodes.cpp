@@ -14,7 +14,7 @@ int totalise_instructions(std::vector<int> codes, int noun, int verb) {
         if (op == 99) {
             return codes[0];
         }
-        codes[pos] = (op&1) ? codes[first]+codes[second] : codes[first]*codes[second];
+        codes[pos] = op&1 ? codes[first]+codes[second] : codes[first]*codes[second];
     }
 }
 

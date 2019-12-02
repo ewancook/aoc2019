@@ -2,8 +2,8 @@
 import itertools
 intcodes = [int(x) for x in open("input.txt").readline().rstrip("\n").split(",")]
 
-def totalise_instructions(codes, cell_one, cell_two):
-    codes[1:3] = cell_one, cell_two
+def totalise_instructions(codes, noun, verb):
+    codes[1:3] = noun, verb
     i = 0
     while i < len(codes):
         op, first, second, pos = codes[i:i+4]
