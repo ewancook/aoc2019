@@ -6,16 +6,9 @@
 #include <set>
 
 int main() {
-        std::ifstream f("input.txt");
-        std::string line;
-        std::getline(f, line);
-        auto hyphen = std::find(line.begin(), line.end(), '-');
-        auto lower = std::stoi(std::string(line.begin(), hyphen));
-        auto upper = std::stoi(std::string(hyphen+1, line.end()));
-
         auto part_one{0}, part_two{0};
 
-        for (auto i = lower; i <= upper; i++) {
+        for (auto i = 109165; i <= 576723; i++) {
             std::string value = std::to_string(i);
              if (!std::is_sorted(value.begin(), value.end())) {
                  continue;
