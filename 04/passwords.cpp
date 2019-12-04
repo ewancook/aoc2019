@@ -13,17 +13,13 @@ int main() {
              if (!std::is_sorted(value.begin(), value.end())) {
                  continue;
              }
-             std::vector<int> ints(value.length());
-             std::transform(value.begin(), value.end(), ints.begin(), [](char const& v) {
-                 return v - '0';
-             });
-             auto ints_set = std::set<int>(ints.begin(), ints.end());
-             if (ints_set.size() == ints.size()) {
+             auto values_set = std::set<int>(value.begin(), value.end());
+             if (values_set.size() == value.length()) {
                  continue;
              }
              part_one++;
-             if (std::any_of(ints_set.begin(), ints_set.end(), [&ints](int const& v) {
-                 return std::count(ints.begin(), ints.end(), v) == 2;
+             if (std::any_of(values_set.begin(), values_set.end(), [&value](int const& v) {
+                 return std::count(value.begin(), value.end(), v) == 2;
              })) {
                  part_two++;
              }
