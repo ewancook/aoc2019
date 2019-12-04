@@ -3,7 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <vector>
-#include <set>
+#include <unordered_set>
 
 int main() {
         auto part_one{0}, part_two{0};
@@ -13,7 +13,7 @@ int main() {
              if (!std::is_sorted(value.begin(), value.end())) {
                  continue;
              }
-             auto values_set = std::set<int>(value.begin(), value.end());
+             auto values_set = std::unordered_set<int>(value.begin(), value.end());
              if (values_set.size() == value.length()) {
                  continue;
              }
