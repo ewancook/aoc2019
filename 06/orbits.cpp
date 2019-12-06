@@ -7,7 +7,6 @@
 class Planet {
 public:
     int depth();
-    std::string name;
     std::string orbiting_name;
     Planet *orbiting;
 };
@@ -23,7 +22,7 @@ int Planet::depth() {
 
 int part_one(std::unordered_map<std::string, Planet*>& planets) {
     auto count = 0;
-    for (auto const& [n, p]: planets) {
+    for (auto const& [_, p]: planets) {
         count += p->depth();
     }
     return count;
@@ -43,8 +42,7 @@ Planet* lowest_common(Planet* a, Planet* b) {
     }
 }
 
-int part_two(std::unordered_map<std::string, Planet*>& planets) {
-    auto san = planets["SAN"], you = planets["YOU"];
+int part_two(Planet* san, Planet* you) {
     auto lcn = lowest_common(san, you);
     return san->depth() + you->depth() - 2*lcn->depth();
 }
@@ -58,7 +56,6 @@ int main() {
         auto first = std::string(line.begin(), bracket + line.begin());
         auto second = std::string(line.begin() + bracket + 1, line.end());
         auto planet = new(Planet);
-        planet->name = second;
         planet->orbiting_name = first;
         planets[second] = planet;
     }
@@ -67,5 +64,5 @@ int main() {
     }
     planets["COM"] = nullptr;
     std::cout << "Part One: " << part_one(planets) << std::endl;
-    std::cout << "Part Two: " << part_two(planets) << std::endl;
+    std::cout << "Part Two: " << part_two(planets["SAN"], planets["YOU"]) << std::endl;
 }
