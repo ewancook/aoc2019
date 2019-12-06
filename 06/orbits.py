@@ -3,9 +3,6 @@ class Planet:
 		self.name = name
 		self.orbiting = orbiting
 
-	def set_orbiting(self, orbiting):
-		self.orbiting = orbiting
-
 	@property
 	def depth(self):
 		start, i = self, 0
@@ -16,7 +13,7 @@ class Planet:
 def part_one(planets):
 	return sum([p.depth for _, p in planets.items()])
 
-def lowest_common(planets, a, b):
+def lowest_common(a, b):
 	path = []
 	while a.orbiting is not None:
 		path.append(a.orbiting)
@@ -27,7 +24,7 @@ def lowest_common(planets, a, b):
 
 def part_two(planets):
 	san, you = planets["SAN"], planets["YOU"]
-	lcn = lowest_common(planets, san, you)
+	lcn = lowest_common(san, you)
 	return san.depth + you.depth - 2*lcn.depth
 
 planets = {}
@@ -40,7 +37,7 @@ for a, b in [l.rstrip("\n").split(")") for l in lines]:
 			p = Planet(a)
 			planets[a] = p
 		try:
-			planets[b].set_orbiting(p)
+			planets[b].orbiting = p
 		except KeyError:
 			planets[b] = Planet(b, p)
 
