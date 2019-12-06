@@ -27,19 +27,11 @@ def part_two(planets):
 	lcn = lowest_common(san, you)
 	return san.depth + you.depth - 2*lcn.depth
 
-planets = {}
-lines = [l for l in open("input.txt").readlines()]
-for a, b in [l.rstrip("\n").split(")") for l in lines]:
-		p = None
-		try:
-			p = planets[a]
-		except KeyError:
-			p = Planet(a)
-			planets[a] = p
-		try:
-			planets[b].orbiting = p
-		except KeyError:
-			planets[b] = Planet(b, p)
+orbits = [l.rstrip("\n").split(")") for l in open("input.txt").readlines()]
+planets = {p: Planet(p) for _, p in orbits}
+planets["COM"] = Planet("COM", None)
+for a, b in orbits:
+		planets[b].orbiting = planets[a]
 
 print("Part One:", part_one(planets))
 print("Part Two:", part_two(planets))
