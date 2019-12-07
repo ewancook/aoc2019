@@ -1,6 +1,5 @@
 class Planet:
-	def __init__(self, name, orbiting=None):
-		self.name = name
+	def __init__(self, orbiting=None):
 		self.orbiting = orbiting
 
 	@property
@@ -22,16 +21,14 @@ def lowest_common(a, b):
 		b = b.orbiting
 	return b
 
-def part_two(planets):
-	san, you = planets["SAN"], planets["YOU"]
-	lcn = lowest_common(san, you)
-	return san.depth + you.depth - 2*lcn.depth
+def part_two(san, you):
+	return san.depth + you.depth - 2*lowest_common(san, you).depth
 
-orbits = [l.rstrip("\n").split(")") for l in open("input.txt").readlines()]
-planets = {p: Planet(p) for _, p in orbits}
-planets["COM"] = Planet("COM", None)
+orbits = [l.strip().split(")") for l in open("input.txt").readlines()]
+planets = {p: Planet() for _, p in orbits}
+planets["COM"] = Planet(None)
 for a, b in orbits:
 		planets[b].orbiting = planets[a]
 
 print("Part One:", part_one(planets))
-print("Part Two:", part_two(planets))
+print("Part Two:", part_two(planets["SAN"], planets["YOU"]))
