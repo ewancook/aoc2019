@@ -26,16 +26,14 @@ def new_graph():
     return graph
 
 
-def calc_fuel(target, part_one):
+def calc_fuel(target):
     fuel, i = 1, 0
     while True:
         ore = calc_ore(new_graph(), fuel + 1)
-        if ore > target:
+        if ore >= target:
             return fuel, i
         fuel, i = max(fuel + 1, int(target * (fuel + 1) // ore)), i + 1
 
 
-part_one = calc_ore(new_graph(), 1)
-print("Part One: {}".format(part_one))
-print("Part Two: {} ({} iterations)".format(*calc_fuel(1e12, part_one)))
-
+print("Part One: {}".format(calc_ore(new_graph(), 1)))
+print("Part Two: {} ({} iterations)".format(*calc_fuel(1e12)))
