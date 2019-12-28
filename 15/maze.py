@@ -49,8 +49,7 @@ def heuristic(vec, goal):
 
 
 def part_one(maze, goal):
-    path = path_find((0, 0), goal, maze, heuristic, neighbours)
-    return len(path) - 2
+    return path_find((0, 0), goal, maze, heuristic, neighbours)
 
 
 def part_two(maze, goal):
